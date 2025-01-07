@@ -3,11 +3,37 @@ import Head from "next/head"
 import { Stack } from "@mui/material";
 import Top from "../Top";
 import Footer from "../Footer";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 
 
 const withLayoutBasic = (Component: any) => {
     return (props: any) => {
-        return (
+
+        const device = useDeviceDetect();
+
+        if (device === "mobile") {
+            return (
+                <>
+               <Head>
+                <title>Nestar</title>
+              </Head>
+              <Stack id="mobile-wrap">
+                  <Stack id={"top"}>
+                      <Top />
+                  </Stack>
+    
+                <Stack id={"main"}>
+                  <Component {...props} />
+                </Stack>
+    
+                <Stack id={"footer"}>
+                  <Footer />
+                </Stack>
+              </Stack>
+            </>
+          );
+        } else {
+           return (
         <>
             <Head>
                 <title>Nestar</title>
@@ -40,7 +66,8 @@ const withLayoutBasic = (Component: any) => {
                     </Stack>
             </Stack>
         </>
-        );
+        ); 
+        }
     };
 };
 

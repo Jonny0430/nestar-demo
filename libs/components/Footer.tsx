@@ -3,8 +3,14 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import useDeviceDetect from "./hooks/useDeviceDetect";
 const Footer = () => {
-    return (
+    const device = useDeviceDetect();
+
+  if (device === "mobile") {
+    return <Stack className={"footer-container"}>FOOTER MOBILE</Stack>;
+    } else {
+        return (
         <Stack className={"footer-container"}>
             <Stack className={"main"}>
               <Stack className={"left"}>
@@ -69,6 +75,7 @@ const Footer = () => {
             </Stack>
         </Stack>
     )
+    } 
 };
 
 export default Footer;
